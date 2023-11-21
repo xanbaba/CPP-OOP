@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 
-class StudentHelder
+/*class StudentHelder
 {
 public:
     static bool IsDiamondsValid(int value)
@@ -95,16 +95,98 @@ public:
 };
 
 
-int Student::StaticValue = 0;
+int Student::StaticValue = 0;*/
+
+class User
+{
+public:
+    ~User()
+    {
+        std::cout << "~User()\n";
+    }
+
+    User()
+    {
+        std::cout << "User()\n";
+        m_login = 0;
+        m_password = 0;
+    }
+
+    User(int a_login, int a_password)
+    {
+        std::cout << "User(int a_login, int a_password)\n";
+        m_login = a_login;
+        m_password = a_password;
+    }
+
+    int GetLogin()
+    {
+        return m_login;
+    }
+
+    int GetPassword()
+    {
+        return m_password;
+    }
+
+    void SetPassword(int a_password)
+    {
+        m_password = a_password;
+    }
+
+    void SetLogin(int a_login)
+    {
+        m_login = a_login;
+    }
+
+private:
+    int m_login;
+    int m_password;
+};
 
 int main(int argc, char* argv[])
 {
-    Student student1{100, 75, "Xanbaba"};
+    /*Student student1{100, 75, "Xanbaba"};
     std::cout << student1.get_static_value() << '\n';
 
     student1.SetDiamonds(10);
     std::cout << student1.GetDiamonds() << '\n';
 
-    std::cout << student1.GetName() << '\n';
+    std::cout << student1.GetName() << '\n';*/
+
+    /*{
+        User users[3];
+    }*/
+    
+    /*{
+        User* user = new User;
+
+        delete user;
+    }*/
+    /*{
+        User* users = new User[3];
+        delete[] users;
+    }*/
+
+    {
+        User* users = (User*)malloc(sizeof(User) * 3);
+        free(users);
+    }
+
+    {
+        User* users = (User*)::operator new(sizeof(User) * 3);
+        ::operator delete(users);
+    }
+
+    {
+        User* users = (User*)::operator new(sizeof(User) * 3);
+        User* current_user = users;
+
+        new(current_user) User{10, 20};
+        current_user++;
+        new(current_user) User{14, 443};
+        ::operator delete(users);
+    }
+
     return 0;
 }
