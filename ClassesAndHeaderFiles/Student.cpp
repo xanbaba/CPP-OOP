@@ -11,18 +11,17 @@ Student::~Student()
     delete[] m_name;
 }
 
-Student::Student()
+Student::Student() : Student(0, 0, "", 0)
 {
     std::cout << "Default constructor" << '\n';
-
-    m_coins = 0;
-    m_diamonds = 0;
-    m_name = nullptr;
-    m_badges = 0;
-    ++StaticValue;
 }
 
-Student::Student(int a_diamonds, int a_coins, const char* a_name)
+Student::Student(int a_diamonds, int a_coins, const char* a_name) : Student(a_diamonds, a_coins, a_name, 0)
+{
+    std::cout << "Overloaded constructor" << '\n';
+}
+
+Student::Student(int a_diamonds, int a_coins, const char* a_name, int a_badges)
 {
     std::cout << "Overloaded constructor" << '\n';
 
@@ -31,13 +30,9 @@ Student::Student(int a_diamonds, int a_coins, const char* a_name)
     SetName(a_name);
 
     strcpy(m_name, a_name);
-    ++StaticValue;
-}
-
-Student::Student(int a_diamonds, int a_coins, const char* a_name, int a_badges) : Student(a_diamonds, a_coins, a_name)
-{
-    std::cout << "Overloaded constructor" << '\n';
     m_badges = a_badges;
+
+    ++StaticValue;
 }
 
 int Student::GetDiamonds()

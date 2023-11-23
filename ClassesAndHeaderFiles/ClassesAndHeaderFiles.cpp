@@ -2,6 +2,6 @@
 
 int main(int argc, char* argv[])
 {
-    Student student{100, 200, "Xanbaba", 150};
+    Student student{};
     return 0;
 }
