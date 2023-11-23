@@ -14,6 +14,8 @@ int main(int argc, char* argv[])
         array.prepend(50);
         array.prepend(60);
 
+        array.sort();
+
         for (int i = 0; i < array.length(); ++i)
         {
             std::cout << array.get(i) << ' ';

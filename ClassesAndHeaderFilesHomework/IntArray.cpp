@@ -60,8 +60,6 @@ void IntArray::move_array_right()
     array[0] = 0;
 }
 
-
-
 int IntArray::get(const int index)
 {
     return array[index];
@@ -82,3 +80,50 @@ bool IntArray::is_empty()
 {
     return m_size == 0;
 }
+
+/*{
+        for (int i = 0; i < size; i++)
+        {
+            bool is_sorted = true;
+            for (int j = 0; j < size - i - 1; j++)
+            {
+                if (arr[j] > arr[j + 1])
+                {
+                    int temp = arr[j];
+
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                    is_sorted = false;
+                }
+            }
+            if (is_sorted)
+            {
+                break;
+            }
+            std::cout << '\n';
+        }
+    }*/
+
+void IntArray::sort(bool reverse)
+{
+    for (int i = 0; i < m_size; i++)
+    {
+        bool is_sorted = true;
+        for (int j = 0; j < m_size - i - 1; j++)
+        {
+            if (array[j] > array[j + 1])
+            {
+                int temp = array[j];
+
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+                is_sorted = false;
+            }
+        }
+        if (is_sorted)
+        {
+            break;
+        }
+    }
+}
+

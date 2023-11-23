@@ -12,6 +12,7 @@ public:
     int length();
     int get_capacity();
     bool is_empty();
+    void sort(bool reverse = false);
 private:
     int m_size;
     int m_capacity;
