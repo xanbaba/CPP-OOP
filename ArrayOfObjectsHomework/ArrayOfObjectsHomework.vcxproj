@@ -157,10 +157,12 @@
     <ClCompile Include="ArrayOfObjectsHomework.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Stock.cpp" />
+    <ClCompile Include="StockHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Item.h" />
     <ClInclude Include="Stock.h" />
+    <ClInclude Include="StockHelper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

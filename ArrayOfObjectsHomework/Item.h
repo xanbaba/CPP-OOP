@@ -17,6 +17,6 @@ public:
 
     
 private:
-    char* m_name;
+    char* m_name = nullptr;
     int m_price;
 };
