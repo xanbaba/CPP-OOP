@@ -20,10 +20,21 @@ public:
     String Substring(int start_index, int symbols_count);
     void LeftTrim();
     void RightTrim();
+    void Trim();
+    void ToUpper() const;
+    void ToLower() const;
+    void Reverse() const;
+    bool Compare(const String& str) const;
+    bool StartsWith(const String&);
+    bool StartsWith(const char*);
+    bool EndsWith(const String&);
+    bool EndsWith(const char*);
+
 private:
     char* m_string_array;
     int m_size;
     int m_capacity;
 
     void Reallocate();
+    void MoveStringLeft(int start_index);
 };

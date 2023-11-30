@@ -94,7 +94,7 @@ int String::Find(const char symbol, bool reverse) const
         }
         return -1;
     }
-    
+
     for (int i = m_size - 1; i >= 0; --i)
     {
         if (m_string_array[i] == symbol)
@@ -132,12 +132,111 @@ String String::Substring(const int start_index, int symbols_count)
 
 void String::LeftTrim()
 {
-    
+    int trim_count{};
+    for (int i = 0; i < m_size; ++i)
+    {
+        if (m_string_array[i] != ' ')
+        {
+            break;
+        }
+        ++trim_count;
+    }
+
+    for (int i = 0; i < trim_count; ++i)
+    {
+        MoveStringLeft(0);
+    }
+    m_size -= trim_count;
 }
 
 void String::RightTrim()
 {
-    
+    for (int i = m_size - 1; i >= 0; --i)
+    {
+        if (m_string_array[i] != ' ')
+        {
+            break;
+        }
+        m_string_array[i] = '\0';
+        --m_size;
+    }
+}
+
+void String::Trim()
+{
+    LeftTrim();
+    RightTrim();
+}
+
+void String::ToUpper() const
+{
+    constexpr char upper_lower_diff = 'A' - 'a';
+    for (int i = 0; i < m_size; ++i)
+    {
+        const char current_symbol = m_string_array[i];
+        if (current_symbol >= 'a' && current_symbol <= 'z')
+        {
+            m_string_array[i] += upper_lower_diff;
+        }
+    }
+}
+
+void String::ToLower() const
+{
+    constexpr char upper_lower_diff = 'a' - 'A';
+    for (int i = 0; i < m_size; ++i)
+    {
+        const char current_symbol = m_string_array[i];
+        if (current_symbol >= 'A' && current_symbol <= 'Z')
+        {
+            m_string_array[i] += upper_lower_diff;
+        }
+    }
+}
+
+void String::Reverse() const
+{
+    for (int i = 0; i < m_size / 2; ++i)
+    {
+        std::swap(m_string_array[i], m_string_array[m_size - 1 - i]);
+    }
+}
+
+bool String::Compare(const String& str) const
+{
+    return strcmp(m_string_array, str.m_string_array) == 0;
+}
+
+bool String::StartsWith(const String& str)
+{
+    const int str_len = str.m_size;
+    if (str_len > m_size)
+    {
+        return false;
+    }
+    const auto start_of_string = Substring(0, str_len);
+    return start_of_string.Compare(str);
+}
+
+bool String::StartsWith(const char* str)
+{
+    return StartsWith(String{str});
+}
+
+bool String::EndsWith(const String& str)
+{
+    const int str_len = str.m_size;
+    if (str_len > m_size)
+    {
+        return false;
+    }
+    const auto end_of_string = Substring(m_size - str_len, str_len);
+    return end_of_string.Compare(str);
+}
+
+bool String::EndsWith(const char* str)
+{
+    return EndsWith(String{str});
 }
 
 void String::Reallocate()
@@ -151,4 +250,12 @@ void String::Reallocate()
 
     delete[] m_string_array;
     m_string_array = new_string_array;
+}
+
+void String::MoveStringLeft(int start_index)
+{
+    for (int i = start_index; i < m_size; ++i)
+    {
+        m_string_array[i] = m_string_array[i + 1];
+    }
 }
