@@ -17,6 +17,15 @@ public:
         std::memcpy(mData, aString, mSize + 1);
     }
 
+    String(String&& aOther) noexcept
+    {
+        std::cout << "move constructor\n";
+        mData = aOther.mData;
+        mSize = aOther.mSize;
+        aOther.mData = nullptr;
+        aOther.mSize = 0;
+    }
+
     String(const String& aOther)
     {
         CopyData(aOther);
@@ -34,6 +43,20 @@ public:
             CopyData(aOther);
         }
 
+        return *this;
+    }
+
+    String& operator=(String&& aOther) noexcept
+    {
+        std::cout << "move assignment\n";
+        if (this != &aOther)
+        {
+            this->~String();
+            mData = aOther.mData;
+            mSize = aOther.mSize;
+            aOther.mData = nullptr;
+            aOther.mSize = 0;
+        }
         return *this;
     }
 
@@ -95,13 +118,24 @@ private:
     }
 };
 
+void f(String&& s)
+{
+    s *= 2;
+    std::cout << s.GetString() << '\n';
+}
+
 int main(int argc, char* argv[])
 {
-    auto s = String{"1000abc"};
-    auto s2 = s;
-    auto s3 = s2;
-    s3 *= 2;
-    s3[0] = '2';
-    std::cout << (s3 * 3).GetString();
+    {
+        String s1{"Hello"};
+        String s2 = std::move(s1);
+    }
+    {
+        String s1{"Hello"};
+        String s2 = "C++";
+
+        s2 = std::move(s1);
+    }
+    
     return 0;
 }
