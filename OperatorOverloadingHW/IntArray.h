@@ -5,6 +5,7 @@ class IntArray
 public:
     IntArray();
     IntArray(int a_capacity);
+    IntArray(const IntArray& a_original);
     ~IntArray();
     void append(int value);
     void prepend(int value);

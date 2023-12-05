@@ -10,10 +10,22 @@ IntArray::IntArray(const int a_capacity)
     m_capacity = a_capacity;
 }
 
+IntArray::IntArray(const IntArray& a_original)
+{
+    m_size = a_original.m_size;
+    m_capacity = a_original.m_capacity;
+    array = new int[m_capacity]{};
+    for (int i = 0; i < m_size; ++i)
+    {
+        array[i] = a_original.array[i];
+    }
+}
+
 IntArray::~IntArray()
 {
     delete[] array;
 }
+
 
 void IntArray::append(int value)
 {
@@ -116,16 +128,11 @@ int IntArray::operator[](int a_index) const
 
 IntArray IntArray::operator+(const IntArray& a_original)
 {
-    IntArray copy_array;
-    
-    for (int i = 0; i < m_size; ++i)
-    {
-        copy_array.append(array[i]);
-    }
+    IntArray copy_array{*this};
     
     for (int i = 0; i < a_original.m_size; ++i)
     {
-        append(a_original.array[i]);
+        copy_array.append(a_original.array[i]);
     }
 
     return copy_array;
