@@ -126,15 +126,13 @@ int IntArray::operator[](int a_index) const
     return array[a_index];
 }
 
-IntArray IntArray::operator+(const IntArray& a_original)
+IntArray IntArray::operator+(const IntArray& a_second_array) const
 {
     IntArray copy_array{*this};
-    
-    for (int i = 0; i < a_original.m_size; ++i)
+    for (int i = 0; i < a_second_array.m_size; ++i)
     {
-        copy_array.append(a_original.array[i]);
+        copy_array.append(a_second_array[i]);
     }
-
     return copy_array;
 }
 

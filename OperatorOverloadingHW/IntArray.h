@@ -16,7 +16,7 @@ public:
     void sort(bool reverse = false);
     int& operator[](int a_index);
     int operator[](int a_index) const;
-    IntArray operator+(const IntArray& a_original);
+    IntArray operator+(const IntArray& a_original) const;
 private:
     int m_size;
     int m_capacity;
