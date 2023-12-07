@@ -47,5 +47,6 @@ int main(int argc, char* argv[])
         std::cout << std::boolalpha;
         std::cout << (clock2 != clock) << '\n';
     }*/
+    // Task 3
     return 0;
 }
