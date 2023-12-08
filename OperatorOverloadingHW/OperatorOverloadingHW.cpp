@@ -1,6 +1,9 @@
 #include "IntArray.h"
 #include "Clock.h"
+#include "DateTime.h"
+#include <Windows.h>
 #include <iostream>
+
 #define show_clock(CLOCK) std::cout << "clock: " << (CLOCK).get_hours() << ':' << (CLOCK).get_minutes() << '\n'
 
 int main(int argc, char* argv[])
@@ -48,5 +51,11 @@ int main(int argc, char* argv[])
         std::cout << (clock2 != clock) << '\n';
     }*/
     // Task 3
+    {
+        auto now1 = DateTime::get_now();
+        // Sleep(3000);
+        auto now2 = DateTime::get_now();
+        std::cout << std::boolalpha << now1.get_week_day() << ' ' << now2.get_week_day() << (now2 > DateTime{}) << ' ' << DateTime{}.is_leap_year();
+    }
     return 0;
 }

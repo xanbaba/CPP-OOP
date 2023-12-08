@@ -12,6 +12,123 @@ DateTime::DateTime() : seconds(0),
                        year(1990)
 {}
 
+bool DateTime::is_leap_year() const
+{
+    if (year % 400 == 0)
+    {
+        return true;
+    }
+    if (year % 100 == 0)
+    {
+        return false;
+    }
+    if (year % 4 == 0)
+    {
+        return true;
+    }
+    
+    return false;
+}
+
+bool DateTime::operator>(const DateTime& a_datetime) const
+{
+    if (year > a_datetime.year)
+    {
+        return true;
+    }
+    if (year_day > a_datetime.year_day)
+    {
+        return true;
+    }
+
+    const int total_seconds_lhs = hours * 60 * 60 + minutes * 60 + seconds;
+
+    if (const int total_seconds_rhs = a_datetime.hours * 60 * 60 + a_datetime.minutes * 60 + a_datetime.seconds;
+        total_seconds_lhs > total_seconds_rhs)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool DateTime::operator<(const DateTime& a_datetime) const
+{
+    if (year < a_datetime.year)
+    {
+        return true;
+    }
+    if (year_day < a_datetime.year_day)
+    {
+        return true;
+    }
+
+    const int total_seconds_lhs = hours * 60 * 60 + minutes * 60 + seconds;
+
+    if (const int total_seconds_rhs = a_datetime.hours * 60 * 60 + a_datetime.minutes * 60 + a_datetime.seconds;
+        total_seconds_lhs < total_seconds_rhs)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool DateTime::operator>=(const DateTime& a_datetime) const
+{
+    if (*this == a_datetime)
+    {
+        return true;
+    }
+    if (*this > a_datetime)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool DateTime::operator<=(const DateTime& a_datetime) const
+{
+    if (*this == a_datetime)
+    {
+        return true;
+    }
+    if (*this < a_datetime)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool DateTime::operator==(const DateTime& a_datetime) const
+{
+    if (year == a_datetime.year)
+    {
+        return true;
+    }
+    if (year_day == a_datetime.year_day)
+    {
+        return true;
+    }
+
+    const int total_seconds_lhs = hours * 60 * 60 + minutes * 60 + seconds;
+
+    if (const int total_seconds_rhs = a_datetime.hours * 60 * 60 + a_datetime.minutes * 60 + a_datetime.seconds;
+        total_seconds_lhs == total_seconds_rhs)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool DateTime::operator!=(const DateTime& a_datetime) const
+{
+    return !(*this == a_datetime);
+}
+
 int DateTime::get_seconds() const
 {
     return seconds;
