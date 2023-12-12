@@ -1,0 +1,12 @@
+﻿lamp
+string
+phone
+pen
+computer
+headphones
+book
+certificate
+pillow
+python
+snake
+table
