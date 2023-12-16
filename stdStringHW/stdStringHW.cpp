@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+#include "Game.h"
+
 void Task1()
 {
     std::cout << "This mini-game has made a word and you need to guess it.\n"
@@ -36,5 +38,9 @@ void Task1()
 int main(int argc, char* argv[])
 {
     // Task1();
+    Game game;
+    game();
+    
+    std::cin.get();
     return 0;
 }
