@@ -105,7 +105,7 @@ bool IntArray::is_empty() const
     return m_size == 0;
 }
 
-void IntArray::sort(bool reverse)
+void IntArray::sort()
 {
     for (int i = 0; i < m_size; i++)
     {

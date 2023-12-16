@@ -6,6 +6,7 @@
 
 class SortedRandomArray
 {
+    friend std::ostream& operator<<(std::ostream& lhs, const SortedRandomArray& rhs);
 public:
     SortedRandomArray(int a_numbers_count);
     SortedRandomArray(const SortedRandomArray& a_original);
@@ -13,8 +14,8 @@ public:
     SortedRandomArray& operator=(const SortedRandomArray& a_original);
     SortedRandomArray& operator=(SortedRandomArray&& a_original) noexcept;
     ~SortedRandomArray();
-    void Sort(Greater a_greater);
-    void Sort(Less a_less);
+    void Sort(const Greater& a_greater);
+    void Sort(const Less& a_less);
 private:
     IntArray m_array;
     inline static std::default_random_engine m_engine{static_cast<unsigned int>(time(nullptr))};
