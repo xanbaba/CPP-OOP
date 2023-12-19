@@ -157,6 +157,7 @@
     <ClCompile Include="TemplateClassHW.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Array.h" />
     <ClInclude Include="Dictionary.h" />
     <ClInclude Include="KeyValue.h" />
   </ItemGroup>
