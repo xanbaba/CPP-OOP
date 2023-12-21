@@ -17,7 +17,7 @@ public:
     int length() const;
     int get_capacity() const;
     bool is_empty() const;
-    void sort(bool reverse = false);
+    void sort();
     IntArray& operator=(const IntArray& a_original);
     IntArray& operator=(IntArray&& a_original) noexcept;
     int& operator[](int a_index);

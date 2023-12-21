@@ -6,6 +6,7 @@
 #include "GreaterEquals.h"
 #include "LessEquals.h"
 #include "NotEquals.h"
+#include "SortedRandomArray.h"
 
 int main(int argc, char* argv[])
 {
@@ -23,5 +24,11 @@ int main(int argc, char* argv[])
     std::cout << greater_equals(0, 10) << '\n';
     std::cout << less_equals(0, 10) << '\n';
     std::cout << not_equals(0, 10) << '\n';
+    SortedRandomArray array{10};
+    std::cout << array << '\n';
+    array.Sort(greater);
+    std::cout << array << '\n';
+    array.Sort(less);
+    std::cout << array << '\n';
     return 0;
 }

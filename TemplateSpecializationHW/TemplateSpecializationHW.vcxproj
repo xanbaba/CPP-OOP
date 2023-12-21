@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{A8D5D167-018A-4B90-983D-8C48CD483380}</ProjectGuid>
+    <ProjectGuid>{DE05C455-616E-4A82-9AF2-2CFB3012EF15}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>stdStringHW</RootNamespace>
+    <RootNamespace>TemplateSpecializationHW</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -109,7 +109,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,20 +155,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="stdStringHW.cpp" />
-    <ClCompile Include="UserInputHandler.cpp" />
-    <ClCompile Include="Word.cpp" />
-    <ClCompile Include="WordGenerator.cpp" />
+    <ClCompile Include="TemplateSpecializationHW.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="random_words.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="UserInputHandler.h" />
-    <ClInclude Include="Word.h" />
-    <ClInclude Include="WordGenerator.h" />
+    <ClInclude Include="is_primitive.h" />
+    <ClInclude Include="is_ref.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
