@@ -158,7 +158,6 @@ template <typename T>
 T Queue<T>::Pop()
 {
     T popped_element = m_data[m_start_index];
-    m_data[m_start_index].~T();
     --m_size;
     ++m_start_index;
     return popped_element;
@@ -198,6 +197,7 @@ bool Queue<T>::IsEmpty() const
 template <typename T>
 void Queue<T>::Shrink()
 {
+    std::cout << "Shrink\n";
     for (size_t i = 0; i < m_size; ++i)
     {
         m_data[i] = m_data[m_start_index + i];
@@ -211,6 +211,7 @@ void Queue<T>::Shrink()
 template <typename T>
 void Queue<T>::Reallocate()
 {
+    std::cout << "Reallocate\n";
     m_capacity *= 2;
     T* new_data = static_cast<T*>(operator new(sizeof(T) * m_capacity));
     for (size_t i = 0; i < m_size; ++i)

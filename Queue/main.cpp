@@ -1,9 +1,45 @@
 ﻿#include "Queue.h"
 
+class User
+{
+public:
+    ~User()
+    {
+        delete[] data;
+    }
+    User()
+    {
+        data = new int[5];
+    }
+
+    User(const User& a_other)
+    {
+        data = new int[5];
+    }
+
+    User& operator=(const User& a_other)
+    {
+        if (this != &a_other)
+        {
+            delete[] data;
+            data = new int[5];
+        }
+        return *this;
+    }
+
+    int* data;
+};
+
+std::ostream& operator<<(std::ostream& out, User queue)
+{
+    out << 1;
+    return out;
+}
+
 int main(int argc, char* argv[])
 {
     // while (true)
-    {
+    /*{
         Queue<int> queue_int{2};
     
         queue_int.Push(5);
@@ -54,5 +90,59 @@ int main(int argc, char* argv[])
         std::cout << queue_int5 << "\n---------------\n";
         std::cout << queue_int4 << "\n---------------\n";
         std::cout << std::boolalpha << queue_int5.IsEmpty();
+    }*/
+
+    while (true)
+    {
+        Queue<User> queue_int{2};
+    
+        queue_int.Push(User{});
+        queue_int.Pop();
+        queue_int.Push(User{});
+
+        queue_int.Push(User{});
+        queue_int.Push(User{});
+
+        queue_int.Pop();
+        queue_int.Pop();
+        // queue_int.Pop();
+
+        std::cout << queue_int << "\n---------------\n";
+
+        Queue<User> queue_int2{queue_int};
+        queue_int2.Push(User{});
+        queue_int2.Push(User{});
+        queue_int2.Push(User{});
+        std::cout << queue_int2 << "\n---------------\n";
+        queue_int2.Pop();
+        std::cout << queue_int2 << "\n---------------\n";
+        //
+        Queue<User> queue_int3;
+        queue_int3 = queue_int2;
+        queue_int3.Pop();
+        queue_int3.Push(User{});
+        queue_int3.Push(User{});
+        // queue_int3.Push(User{});
+        std::cout << queue_int3 << "\n---------------\n";
+        //
+        //
+        // Queue<User> queue_int4 = std::move(queue_int3);
+        // queue_int4.Push(User{});
+        // std::cout << queue_int4 << "\n---------------\n";
+        // std::cout << queue_int3 << "\n---------------\n";
+        //
+        // Queue<User> queue_int5;
+        // queue_int5 = std::move(queue_int4);
+        // queue_int5.Push(User{});
+        // queue_int5.Pop();
+        // queue_int5.Pop();
+        // queue_int5.Pop();
+        // queue_int5.Pop();
+        // queue_int5.Pop();
+        // queue_int5.Pop();
+        // queue_int5.Pop();
+        // std::cout << queue_int5 << "\n---------------\n";
+        // std::cout << queue_int4 << "\n---------------\n";
+        // std::cout << std::boolalpha << queue_int5.IsEmpty();
     }
 }
