@@ -60,7 +60,8 @@ Queue<T>::Queue() : Queue(default_capacity)
 template <typename T>
 Queue<T>::Queue(size_t a_capacity)
 {
-    m_size = m_start_index = 0;
+    m_size = 0;
+    m_start_index = 0;
     m_capacity = a_capacity;
 
     m_data = static_cast<T*>(operator new(sizeof(T) * m_capacity));
@@ -157,11 +158,13 @@ T& Queue<T>::Back()
 template <typename T>
 T Queue<T>::Pop()
 {
-    T popped_element = m_data[m_start_index];
-    --m_size;
+    T deleted_element = m_data[m_start_index];
+    m_data[m_start_index].~T();
     ++m_start_index;
-    return popped_element;
+    --m_size;
+    return deleted_element;
 }
+
 
 template <typename T>
 void Queue<T>::Push(const T& a_element)
@@ -177,7 +180,6 @@ void Queue<T>::Push(const T& a_element)
             Reallocate();
         }
     }
-
     new(m_data + m_start_index + m_size) T{a_element};
     ++m_size;
 }
@@ -197,21 +199,17 @@ bool Queue<T>::IsEmpty() const
 template <typename T>
 void Queue<T>::Shrink()
 {
-    std::cout << "Shrink\n";
     for (size_t i = 0; i < m_size; ++i)
     {
-        m_data[i] = m_data[m_start_index + i];
+        new(m_data + i) T{m_data[m_start_index + i]};
+        m_data[m_start_index + i].~T();
     }
-
-    m_data[m_start_index + m_size - 1].~T();
-
     m_start_index = 0;
 }
 
 template <typename T>
 void Queue<T>::Reallocate()
 {
-    std::cout << "Reallocate\n";
     m_capacity *= 2;
     T* new_data = static_cast<T*>(operator new(sizeof(T) * m_capacity));
     for (size_t i = 0; i < m_size; ++i)
