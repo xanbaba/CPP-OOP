@@ -7,6 +7,7 @@
 template <typename T>
 class HashSet
 {
+    friend std::ostream& operator<<(std::ostream& out, const HashSet<int>& hash_set);
 public:
     ~HashSet();
 
@@ -19,6 +20,7 @@ public:
     void Add(const T& a_element);
     void Remove(const T& a_element);
     double GetLoadFactor();
+    size_t GetBucketsCount() const;
 private:
     size_t m_buckets_count = 10;
     std::hash<T> m_hash;
@@ -96,7 +98,7 @@ void HashSet<T>::Add(const T& a_element)
 {
     auto hash_index = m_hash(a_element) % m_buckets_count;
     m_buckets_array[hash_index].Append(a_element);
-    if (GetLoadFactor() > 0.7)
+    if (GetLoadFactor() >= 0.7)
     {
         Reallocate();
     }
@@ -113,20 +115,26 @@ template <typename T>
 double HashSet<T>::GetLoadFactor()
 {
     size_t full_buckets{};
-    for (int i = 0; i < m_buckets_count; ++i)
+    for (size_t i = 0; i < m_buckets_count; ++i)
     {
-        m_buckets_array[i].Size() == 0 ? ++full_buckets : 0;
+        m_buckets_array[i].Size() > 0 ? ++full_buckets : 0;
     }
 
     return static_cast<double>(full_buckets) / static_cast<double>(m_buckets_count);
 }
 
 template <typename T>
+size_t HashSet<T>::GetBucketsCount() const
+{
+    return m_buckets_count;
+}
+
+template <typename T>
 void HashSet<T>::Reallocate()
 {
     const size_t new_buckets_count = m_buckets_count * 2;
-    auto new_data = m_buckets_array = new Array<T>[new_buckets_count];
-    for (int i = 0; i < m_buckets_count; ++i)
+    auto new_data = new Array<T>[new_buckets_count];
+    for (size_t i = 0; i < m_buckets_count; ++i)
     {
         for (int j = 0; j < m_buckets_array[i].Size(); ++j)
         {
@@ -138,4 +146,19 @@ void HashSet<T>::Reallocate()
     this->~HashSet();
     m_buckets_array = new_data;
     m_buckets_count = new_buckets_count;
+}
+
+
+inline std::ostream& operator<<(std::ostream& out, const HashSet<int>& hash_set)
+{
+    for (size_t i = 0; i < hash_set.m_buckets_count; ++i)
+    {
+        out << i << " bucket - ";
+        if (hash_set.m_buckets_array[i].Size() > 0)
+        {
+            out << hash_set.m_buckets_array[i];
+        }
+        out << '\n';
+    }
+    return out;
 }

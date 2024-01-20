@@ -15,5 +15,8 @@ int main(int argc, char* argv[])
     hash_set.Add(9);
     hash_set.Add(10);
     hash_set.Add(11);
+    hash_set.Remove(7);
+    hash_set.Remove(11);
+    std::cout << hash_set << '\n';
     return 0;
 }
