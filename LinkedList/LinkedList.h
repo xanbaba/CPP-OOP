@@ -161,7 +161,7 @@ public:
         return MSize == 0;
     }
 
-    void InsertAfter(const T& AElement, Node* APosition)
+    Node* InsertAfter(const T& AElement, Node* APosition)
     {
         auto LNode = new Node{AElement};
         auto CurrentNext = APosition->Next;
@@ -173,6 +173,8 @@ public:
         {
             MTail = LNode;
         }
+
+        return LNode;
     }
 
     void Remove(const Node* APosition)
@@ -199,6 +201,18 @@ public:
         }
         --MSize;
         delete APosition;
+    }
+
+    void Reverse()
+    {
+        Node* current_node = MTail = MHead;
+        while (current_node->Next != nullptr)
+        {
+            std::swap(current_node->Next, current_node->Prev);
+            current_node = current_node->Prev;
+        }
+        std::swap(current_node->Next, current_node->Prev);
+        MHead = current_node;
     }
 
     int Count() const

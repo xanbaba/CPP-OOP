@@ -49,9 +49,9 @@ std::ostream& operator<<(std::ostream& out, User queue)
 
 int main(int argc, char* argv[])
 {
-    while (true)
+    // while (true)
     {
-        {
+        /*{
             LinkedList<int> LList;
             auto el1 = LList.PushBack(10);
             LList.Remove(el1);
@@ -80,9 +80,9 @@ int main(int argc, char* argv[])
             LinkedList<int> LList5;
             LList5 = LListEmpty;
             std::cout << LList5 << '\n';
-        }
+        }*/
         
-        {
+        /*{
             LinkedList<User> LList;
             auto el1 = LList.PushBack(User{});
             LList.Remove(el1);
@@ -111,7 +111,18 @@ int main(int argc, char* argv[])
             LinkedList<User> LList5;
             LList5 = LListEmpty;
             std::cout << LList5 << '\n';
-        }
+        }*/
+
+        /*{
+            LinkedList<int> linked_list;
+            linked_list.PushBack(4);
+            linked_list.PushBack(3);
+            linked_list.PushBack(2);
+            linked_list.PushBack(1);
+            std::cout << linked_list << "\n\n";
+            linked_list.Reverse();
+            std::cout << linked_list << "\n\n";
+        }*/
     }
     return 0;
 }
