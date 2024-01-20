@@ -1,5 +1,10 @@
-﻿#include "Queue.h"
+﻿#include "Greater.h"
+#include "Less.h"
+#include "PriorityQueue.h"
+#include "Queue.h"
 
+// THIS IS TEMPORARY CLASS FOR TESTING QUEUE ON HOW IT WORKS WITH OBJECTS WITH MEMORY ALLOCATION
+// ---------------------------------------------------------------------------------------------
 class User
 {
 public:
@@ -7,11 +12,14 @@ public:
     {
         delete[] data;
     }
+
     User()
     {
         data = new int[5];
     }
 
+    // THIS IS TEMPORARY CLASS FOR TESTING QUEUE ON HOW IT WORKS WITH OBJECTS WITH MEMORY ALLOCATION
+    // ---------------------------------------------------------------------------------------------
     User(const User& a_other)
     {
         data = new int[5];
@@ -38,12 +46,70 @@ std::ostream& operator<<(std::ostream& out, User queue)
     return out;
 }
 
+// THIS IS TEMPORARY CLASS FOR TESTING QUEUE ON HOW IT WORKS WITH OBJECTS WITH MEMORY ALLOCATION
+// ---------------------------------------------------------------------------------------------
+
+
+// THIS IS TEMPORARY CLASS FOR TESTING QUEUE ON HOW IT WORKS WITH OBJECTS WITH MEMORY ALLOCATION
+// ---------------------------------------------------------------------------------------------
+class Number
+{
+public:
+    ~Number()
+    {
+        delete data;
+    }
+
+    Number(int number)
+    {
+        data = new int{number};
+    }
+
+    Number(const Number& a_other)
+    {
+        data = new int{*a_other.data};
+    }
+
+    Number& operator=(const Number& a_other)
+    {
+        if (this != &a_other)
+        {
+            this->~Number();
+            data = new int{*a_other.data};
+        }
+        return *this;
+    }
+
+    // THIS IS TEMPORARY CLASS FOR TESTING QUEUE ON HOW IT WORKS WITH OBJECTS WITH MEMORY ALLOCATION
+    // ---------------------------------------------------------------------------------------------
+    bool operator>(const Number& a_other) const
+    {
+        return *data > *a_other.data;
+    }
+
+    bool operator<(const Number& a_other) const
+    {
+        return *data < *a_other.data;
+    }
+
+    int* data;
+};
+
+std::ostream& operator<<(std::ostream& out, const Number& number)
+{
+    out << *number.data;
+    return out;
+}
+
+// THIS IS TEMPORARY CLASS FOR TESTING QUEUE ON HOW IT WORKS WITH OBJECTS WITH MEMORY ALLOCATION
+// ---------------------------------------------------------------------------------------------
+
 int main(int argc, char* argv[])
 {
     // while (true)
     {
         Queue<int> queue_int{2};
-    
+
         queue_int.Push(5);
         queue_int.Pop();
         queue_int.Push(15);
@@ -73,7 +139,7 @@ int main(int argc, char* argv[])
         queue_int3.Push(95);
         std::cout << queue_int3 << "\n---------------\n";
 
-    
+
         Queue<int> queue_int4 = std::move(queue_int3);
         queue_int4.Push(105);
         std::cout << queue_int4 << "\n---------------\n";
@@ -92,9 +158,9 @@ int main(int argc, char* argv[])
         std::cout << queue_int5 << "\n---------------\n";
         std::cout << queue_int4 << "\n---------------\n";
         std::cout << std::boolalpha << queue_int5.IsEmpty();
-    
+
         Queue<User> queue_user{2};
-    
+
         queue_user.Push(User{});
         queue_user.Pop();
         queue_user.Push(User{});
@@ -102,7 +168,7 @@ int main(int argc, char* argv[])
         //
         queue_user.Push(User{});
         queue_user.Push(User{});
-        
+
         queue_user.Pop();
         queue_user.Pop();
         queue_user.Pop();
@@ -141,5 +207,29 @@ int main(int argc, char* argv[])
         std::cout << queue_user5 << "\n---------------\n";
         std::cout << queue_user4 << "\n---------------\n";
         std::cout << std::boolalpha << queue_user5.IsEmpty();
+    }
+
+    // while (true)
+    {
+        PriorityQueue<Number, Less> priority_queue{1};
+        priority_queue.Push(4);
+        priority_queue.Push(3);
+        std::cout << priority_queue << '\n';
+        priority_queue.Push(5);
+        priority_queue.Push(2);
+        priority_queue.Push(3);
+        priority_queue.Push(6);
+
+        priority_queue.Pop();
+        priority_queue.Pop();
+
+        priority_queue.Push(2);
+        priority_queue.Push(5);
+        priority_queue.Push(1);
+        priority_queue.Push(-1);
+        priority_queue.Push(4);
+        priority_queue.Push(7);
+
+        std::cout << priority_queue << '\n';
     }
 }
