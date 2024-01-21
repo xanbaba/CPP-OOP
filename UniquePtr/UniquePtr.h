@@ -123,7 +123,7 @@ T& UniquePtr<T[]>::operator*()
 template <typename T>
 T* UniquePtr<T[]>::operator->()
 {
-    return *m_data;
+    return m_data;
 }
 
 template <typename T>
